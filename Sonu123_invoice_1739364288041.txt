@@ -1,0 +1,12 @@
+=============== INVOICE ===============
+Platform: ANT-ZON
+Username: Sonu123
+Transaction ID: TXN-1464301946
+
+Items Purchased:
+- Round Chair (x2) - $40000.0
+- Dell 7640 Laptop (x1) - $600000.0
+
+Total Amount (after discount): $663000.00
+===============================================
+Thank you for shopping with us!

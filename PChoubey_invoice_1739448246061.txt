@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Flipkart
+Username: PChoubey
+Transaction ID: TXN-1721091144
+
+Items Purchased:
+- boat (x1) - $4000.0
+
+Total Amount (after discount): $4000.00
+===============================================
+Thank you for shopping with us!

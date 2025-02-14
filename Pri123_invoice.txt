@@ -1,0 +1,16 @@
+=============== ANT-ZON INVOICE ===============
+Username: Pri123
+Transaction ID: TXN-1398722387
+
+Items Purchased:
+- sqaure desk (x1) - $10.0
+- vivooo (x1) - $100000.0
+- vivooo (x1) - $100000.0
+- vivooo (x1) - $100000.0
+- vivooo (x1) - $100000.0
+- iqoo (x1) - $25000.0
+- vivooo (x1) - $100000.0
+
+Total Amount (after discount): $525010.00
+===============================================
+Thank you for shopping with ANT-ZON!

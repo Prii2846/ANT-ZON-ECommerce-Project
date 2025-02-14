@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: ANT-ZON
+Username: Sonu123
+Transaction ID: TXN-1495005969
+
+Items Purchased:
+- Round Chair (x2) - $40000.0
+
+Total Amount (after discount): $80000.00
+===============================================
+Thank you for shopping with us!

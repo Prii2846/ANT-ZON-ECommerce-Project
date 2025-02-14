@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Flipkart
+Username: Camila12
+Transaction ID: TXN-1634503301
+
+Items Purchased:
+- boat (x10) - $4000.0
+
+Total Amount (after discount): $40000.00
+===============================================
+Thank you for shopping with us!

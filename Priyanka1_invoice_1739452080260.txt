@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Amazon
+Username: Priyanka1
+Transaction ID: TXN-1573383617
+
+Items Purchased:
+- roatating chair (x1) - $15000.0
+
+Total Amount (after discount): $15000.00
+===============================================
+Thank you for shopping with us!

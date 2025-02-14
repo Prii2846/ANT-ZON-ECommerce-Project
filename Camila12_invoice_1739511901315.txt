@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Flipkart
+Username: Camila12
+Transaction ID: TXN-1849031569
+
+Items Purchased:
+- SOfa (x20) - $60000.0
+
+Total Amount (after discount): $0.00
+===============================================
+Thank you for shopping with us!

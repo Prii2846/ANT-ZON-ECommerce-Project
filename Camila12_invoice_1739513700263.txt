@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Flipkart
+Username: Camila12
+Transaction ID: TXN-1073451400
+
+Items Purchased:
+- laser printer (x13) - $400000.0
+
+Total Amount (after discount): $5200000.00
+===============================================
+Thank you for shopping with us!

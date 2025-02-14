@@ -1,0 +1,12 @@
+=============== INVOICE ===============
+Platform: Flipkart
+Username: PChoubey
+Transaction ID: TXN-1860372512
+
+Items Purchased:
+- Apple i15 (x2) - $900000.0
+- boat (x6) - $4000.0
+
+Total Amount (after discount): $1824000.00
+===============================================
+Thank you for shopping with us!

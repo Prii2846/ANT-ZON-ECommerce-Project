@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Amazon
+Username: Priyanka1
+Transaction ID: TXN-1204299396
+
+Items Purchased:
+- iqoo (x1) - $25000.0
+
+Total Amount (after discount): $25000.00
+===============================================
+Thank you for shopping with us!
