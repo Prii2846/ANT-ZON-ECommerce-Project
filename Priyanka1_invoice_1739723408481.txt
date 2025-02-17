@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Amazon
+Username: Priyanka1
+Transaction ID: TXN-1745093779
+
+Items Purchased:
+- Inkjet Printers (x2) - $1.0
+
+Total Amount (after discount): $2.00
+===============================================
+Thank you for shopping with us!

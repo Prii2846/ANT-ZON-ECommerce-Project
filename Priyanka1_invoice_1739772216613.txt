@@ -1,0 +1,11 @@
+=============== INVOICE ===============
+Platform: Amazon
+Username: Priyanka1
+Transaction ID: TXN-1816046844
+
+Items Purchased:
+- SOFA (x2) - $20000.0
+
+Total Amount (after discount): $40000.00
+===============================================
+Thank you for shopping with us!

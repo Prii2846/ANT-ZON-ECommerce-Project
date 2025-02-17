@@ -3,47 +3,59 @@ package Services;
 import dbRepository.WishlistRepository;
 import models.Platform;
 import models.WishListItem;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class WishlistService {
     private static WishlistService instance;
     private WishlistRepository wishlistRepository;
 
-    private WishlistService() {
+    // Private constructor to enforce singleton pattern
+    private WishlistService() throws ClassNotFoundException, SQLException {
         this.wishlistRepository = new WishlistRepository();
     }
 
-    public static WishlistService getInstance() {
+    // Singleton instance method to ensure only one instance is created
+    public static WishlistService getInstance() throws ClassNotFoundException, SQLException {
         if (instance == null) {
             instance = new WishlistService();
         }
         return instance;
     }
 
-    public boolean addProductToWishlist(String username, int productId,Platform platform) {
-        boolean success = wishlistRepository.addProductToWishlist(username, productId,platform.getPlatformId());
-        if(success){
+    // Adds a product to the user's wishlist
+    public boolean addProductToWishlist(String username, int productId, Platform platform) {
+        // Attempt to add the product to the wishlist in the database
+        boolean success = wishlistRepository.addProductToWishlist(username, productId, platform.getPlatformId());
+
+        // Print success or failure messages based on the operation result
+        if (success) {
             System.out.println("Product added to wishlist successfully");
             return true;
-        }else{
+        } else {
             System.out.println("Failed to add product to wishlist");
         }
         return false;
-
     }
 
-    public List<WishListItem> getWishlist(String username,Platform platform) {
-        return wishlistRepository.getWishlist(username,platform.getPlatformId());
-        
+    // Retrieves the user's wishlist
+    public List<WishListItem> getWishlist(String username, Platform platform) {
+        // Fetch the wishlist from the database for the given username and platform
+        return wishlistRepository.getWishlist(username, platform.getPlatformId());
     }
 
-    public boolean removeFromWishlist(String username, int productId,Platform platform) {
-        boolean remove =  wishlistRepository.removeFromWishlist(username, productId,platform.getPlatformId());
-        if(remove){
-            System.out.println("remove product successfull");
+    // Removes a product from the user's wishlist
+    public boolean removeFromWishlist(String username, int productId, Platform platform) {
+        // Attempt to remove the product from the wishlist in the database
+        boolean remove = wishlistRepository.removeFromWishlist(username, productId, platform.getPlatformId());
+
+        // Print success or failure messages based on the operation result
+        if (remove) {
+            System.out.println("Remove product successful");
             return true;
-        }else{
-            System.out.println("Not remove ! try again");
+        } else {
+            System.out.println("Not removed! Try again");
         }
         return false;
     }
