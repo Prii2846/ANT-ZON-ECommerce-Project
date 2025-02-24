@@ -7,24 +7,42 @@ import models.Product;
 import java.sql.SQLException;
 import java.util.List;
 
-
-/**
- * Handles all Seller-related actions like adding, viewing, updating, 
- * and deleting products. 
- */
+/*
+*******************************************************************************************************
+*   @Class Name         : SellerController
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class manages seller functionalities such as adding, updating, 
+*                         deleting products, and viewing sales statistics.
+*******************************************************************************************************
+*/
 public class SellerController {
     private final SellerService sellerService;
     private static final InputScanner input = InputScanner.getInstance();
-
+/*
+    *********************************************************
+    *  @Constructor    : SellerController
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes the product service instance.
+    *  @throws         : SQLException, ClassNotFoundException
+    *********************************************************
+    */
     public SellerController() throws ClassNotFoundException, SQLException {
         this.sellerService = new SellerService();
         
     }
    
-    /**
-     * Adds a new product for the seller after selecting the appropriate 
-     * category, subcategory, and product type.
-     */
+     /*
+    *********************************************************
+    *  @Method Name    : addProduct
+    *  @Description    : Allows the seller to add a new product.
+    *  @param          : String sellerUsername - The username of the seller.
+    *                    Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void addProduct(String sellerUsername,Platform platform) throws SQLException {
         Printer.printCategoryMenu();
         int categoryChoice = input.readInt("Enter category number: ");
@@ -46,7 +64,7 @@ public class SellerController {
                 Printer.printInvalidChoice();
                 return;
         }
-         // Handle subcategory and product type selection
+     
         Printer.printSubcategoryMenu(mainCategory);
         int subcategoryChoice = input.readInt("Enter subcategory number: ");
         String subCategory = getSubcategory(mainCategory, subcategoryChoice);
@@ -57,7 +75,7 @@ public class SellerController {
         String productType = getProductType(subCategory, typeChoice);
         if (productType == null) return;
         
-           // Get product details from the seller
+    
         String productName = input.readString("Enter product name: ");
         int stock = input.readInt("Enter stock quantity: ");
         double price = input.readDouble("Enter product price: ");
@@ -68,17 +86,28 @@ public class SellerController {
         if (success) System.out.println("\nProduct added successfully!");
         else System.out.println("\nFailed to add product. Please try again.");
     }
-      /**
-     * Retrieves and displays all products for a seller from the database.
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : viewSellerProducts
+    *  @Description    : Displays all products added by the seller.
+    *  @param          : String sellerUsername - The username of the seller.
+    *                    Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void viewProducts(String sellerUsername,Platform platform) throws SQLException {
         List<Product> products = sellerService.getSellerProducts(sellerUsername, platform);
         Printer.printProductList(products);
     }
-      /**
-     * Allows the seller to update product details by selecting specific attributes 
-     * (name, price, stock) or updating all details at once.
-     */
+      /*
+    *********************************************************
+    *  @Method Name    : updateProduct
+    *  @Description    : Allows the seller to update an existing product.
+    *  @param          : String sellerUsername - The username of the seller.
+    *                    Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void updateProduct(String sellerUsername,Platform platform) throws SQLException {
         List<Product> products = sellerService.getSellerProducts(sellerUsername, platform);
         Printer.printProductList(products);
@@ -156,9 +185,15 @@ public class SellerController {
 
         printUpdateResult(sellerService.updateProduct(product, platform), "Product");
     }
-    /**
-     * Deletes a product selected by the seller from the product list.
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : deleteProduct
+    *  @Description    : Allows the seller to delete a product.
+    *  @param          : String sellerUsername - The username of the seller.
+    *                    Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void deleteProduct(String sellerUsername,Platform platform) throws SQLException {
         List<Product> products = sellerService.getSellerProducts(sellerUsername, platform);
         Printer.printProductList(products);
@@ -175,10 +210,6 @@ public class SellerController {
         else System.out.println("\nProduct deletion failed.");
     }
     
-
-    /**
-     * Returns the subcategory based on the selected main category and choice.
-     */
 
     private static String getSubcategory(String mainCategory, int choice) {
         if (mainCategory == null) {
@@ -244,9 +275,7 @@ public class SellerController {
         return subCategory;
     }
     
-    /**
-     * Returns the product type based on the selected subcategory and choice.
-     */
+
     private static String getProductType(String subCategory, int choice) {
         if (subCategory == null) {
             Printer.printInvalidChoice();
@@ -407,12 +436,26 @@ public class SellerController {
         if (success) Printer.printUpdateSuccess(field);
         else Printer.printUpdateFailed(field);
     }
-
+/*
+    *********************************************************
+    *  @Method Name    : showBestSellingProducts
+    *  @Description    : Retrieves and displays the best-selling products from the seller service.
+    *  @param          : Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void showBestSellingProducts(Platform platform) throws SQLException {
         List<String> bestSellingProducts = sellerService.getBestSellingProducts(platform);
         Printer.printBestSellingProducts(bestSellingProducts);
     }
-
+     /*
+    *********************************************************
+    *  @Method Name    : showMostLikedProducts
+    *  @Description    : Retrieves and displays the most liked products from the seller service.
+    *  @param          : Platform platform - The platform being used.
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void showMostLikedProducts(Platform platform) throws SQLException {
         List<String> mostLikedProducts = sellerService.getMostLikedProducts(platform);
         Printer.printMostLikedProducts(mostLikedProducts);

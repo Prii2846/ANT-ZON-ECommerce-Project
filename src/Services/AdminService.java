@@ -4,108 +4,168 @@ import java.util.*;
 import models.*;
 import dbRepository.AdminRepository;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : AdminService
+*   @Author             : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class provides functionalities for admin operations,
+*                         including user management, revenue tracking, product statistics, 
+*                         and inventory monitoring.
+*******************************************************************************************************
+*/
 public class AdminService {
 
     private final AdminRepository adminRepository;  
 
-    // Constructor initializing the AdminRepository
+      /*
+    *********************************************************
+    *  @Constructor Name : AdminService
+    *  @Author          : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company         : Antrazal
+    *  @Description     : Initializes the AdminRepository instance for database operations.
+    *  @param           : None
+    *  @throws          : ClassNotFoundException, SQLException
+    *********************************************************
+    */
     public AdminService() throws ClassNotFoundException, SQLException {
         this.adminRepository = new AdminRepository();  
     }
-
-    /**
-     * Retrieves a list of all users from the repository.
-     * Throws SQLException if database access fails.
-     * @throws SQLException 
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getAllUsers
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves all registered users from the database.
+    *  @param          : None
+    *  @return         : List<User> - List of all users
+    *  @throws         : SQLException
+    *********************************************************
+    */
+   
     public List<User> getAllUsers() throws SQLException {
-        return adminRepository.getAllUsers(); // Delegates to repository
+        return adminRepository.getAllUsers();
     }
 
-    /**
-     * Retrieves the total revenue from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @throws SQLException 
-     */
+
+
+/*
+*********************************************************
+*  @Method Name    : getTotalRevenue
+*  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+*  @Company        : Antrazal
+*  @Description    : Retrieves total revenue across all categories for the selected platform.
+*  @param          : Platform platform - The selected e-commerce platform
+*  @return         : double - Total revenue
+*  @throws         : SQLException
+*********************************************************
+*/
     public double getTotalRevenue(Platform platform) throws SQLException {
-        return adminRepository.getTotalRevenue(platform); // Delegates to repository
+        return adminRepository.getTotalRevenue(platform);
     }
 
-    /**
-     * Retrieves revenue by category from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A map of category names to their respective revenue values.
-     * @throws SQLException 
-     */
+   /*
+    *********************************************************
+    *  @Method Name    : getRevenueByCategory
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves revenue categorized by product categories.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : Map<String, Double> - Category-wise revenue
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public Map<String, Double> getRevenueByCategory(Platform platform) throws SQLException {
-        return adminRepository.getRevenueByCategory(platform); // Delegates to repository
+        return adminRepository.getRevenueByCategory(platform); 
     }
-
-    /**
-     * Retrieves revenue by subcategory from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A map of subcategory names to their respective revenue values.
-     * @throws SQLException 
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getRevenueBySubcategory
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves revenue categorized by product subcategories.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : Map<String, Double> - Subcategory-wise revenue
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public Map<String, Double> getRevenueBySubcategory(Platform platform) throws SQLException {
-        return adminRepository.getRevenueBySubcategory(platform); // Delegates to repository
+        return adminRepository.getRevenueBySubcategory(platform); 
     }
 
-    /**
-     * Retrieves a list of best-selling products from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of best-selling product names.
-     * @throws SQLException 
-     */
+      /*
+    *********************************************************
+    *  @Method Name    : getBestSellingProducts
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of the best-selling products.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : List<String> - Best-selling product names
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public List<String> getBestSellingProducts(Platform platform) throws SQLException {
-        return adminRepository.getBestSellingProducts(platform); // Delegates to repository
+        return adminRepository.getBestSellingProducts(platform); 
     }
-
-    /**
-     * Retrieves a list of most liked products from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of most liked product names.
-     * @throws SQLException 
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getMostLikedProducts
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of the most liked products.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : List<String> - Most liked product names
+    *  @throws         : SQLException
+    *********************************************************
+    */
+   
     public List<String> getMostLikedProducts(Platform platform) throws SQLException {
-        return adminRepository.getMostLikedProducts(platform); // Delegates to repository
+        return adminRepository.getMostLikedProducts(platform); 
     }
-
-    /**
-     * Retrieves a list of top-selling sellers from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of top seller names.
-     * @throws SQLException 
-     */
+   /*
+    *********************************************************
+    *  @Method Name    : getTopSellingSellers
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of top-selling sellers.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : List<String> - Top-selling seller usernames
+    *  @throws         : SQLException
+    *********************************************************
+    */
+   
     public List<String> getTopSellingSellers(Platform platform) throws SQLException {
-        return adminRepository.getTopSellingSellers(platform); // Delegates to repository
+        return adminRepository.getTopSellingSellers(platform); 
     }
-
-    /**
-     * Retrieves a list of low-stock products from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of Product objects representing low-stock products.
-     * @throws SQLException 
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getLowStockProducts
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of products with low stock levels.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : List<Product> - Products with low stock
+    *  @throws         : SQLException
+    *********************************************************
+    */
+ 
     public List<Product> getLowStockProducts(Platform platform) throws SQLException {
-        return adminRepository.getLowStockProducts(platform); // Delegates to repository
+        return adminRepository.getLowStockProducts(platform);
     }
 
-    /**
-     * Retrieves a list of out-of-stock products from the repository.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of Product objects representing out-of-stock products.
-     * @throws SQLException 
-     */
+      /*
+    *********************************************************
+    *  @Method Name    : getOutOfStockProducts
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of products with out of stock levels.
+    *  @param          : Platform platform - The selected e-commerce platform
+    *  @return         : List<Product> - Products with out of  stock
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public List<Product> getOutOfStockProducts(Platform platform) throws SQLException {
-        return adminRepository.getOutOfStockProducts(platform); // Delegates to repository
+        return adminRepository.getOutOfStockProducts(platform); 
     }
 }

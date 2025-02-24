@@ -6,28 +6,46 @@ import Constant.SqlQueries;
 import database.DbConnection;
 import models.CartItem;
 import models.Platform;
-
+/*
+*******************************************************************************************************
+*   @Class Name         : CartRepository
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class handles cart-related database operations, including adding,
+*                         retrieving, and removing items from the cart.
+*******************************************************************************************************
+*/
 public class CartRepository {
 
-    // Database connection
     private Connection connection;
-
-    // Constructor to initialize the database connection
+ /*
+    *********************************************************
+    *  @Constructor    : CartRepository
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Establishes a database connection for cart operations.
+    *********************************************************
+    */
+   
     public CartRepository() throws ClassNotFoundException, SQLException {
         this.connection = DbConnection.getConnection();
     }
-
-    /**
-     * Adds a new item to the cart for a given user on a specific platform.
-     *
-     * @param cartItem  The cart item to add.
-     * @param platform  The platform the cart belongs to.
-     * @return          True if the item was successfully added, false otherwise.
-     * @throws SQLException if there is an issue with the database operation.
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : addCartItem
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Adds an item to the user's cart in the database.
+    *  @param          : CartItem cartItem - The cart item to be added.
+    *  @param          : Platform platform - The platform where the item is added.
+    *  @return         : boolean - Returns true if the item was successfully added.
+    *********************************************************
+    */
+    
     public boolean addCartItem(CartItem cartItem, Platform platform) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(SqlQueries.ADD_CART_ITEM)) {
-            // Set parameters for the prepared statement
+        
             statement.setString(1, cartItem.getUsername());
             statement.setInt(2, cartItem.getProductId());
             statement.setString(3, cartItem.getProductName());
@@ -35,31 +53,33 @@ public class CartRepository {
             statement.setDouble(5, cartItem.getPrice());
             statement.setInt(6, platform.getPlatformId());
 
-            // Execute the insert statement and return true if one or more rows were affected
+     
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            // Throw the exception to allow the caller to handle it
+           
             throw new SQLException("Error adding cart item to the database", e);
         }
     }
 
-    /**
-     * Retrieves all cart items for a given username and platform ID.
-     *
-     * @param username   The username to retrieve cart items for.
-     * @param platformId The platform ID associated with the cart.
-     * @return           A list of CartItem objects.
-     * @throws SQLException if there is an issue with the database operation.
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : getCartItemsByUsername
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves all cart items for a given user and platform.
+    *  @param          : String username - The username of the user.
+    *  @param          : int platformId - The platform ID.
+    *  @return         : List<CartItem> - Returns a list of cart items.
+    *********************************************************
+    */
     public List<CartItem> getCartItemsByUsername(String username, int platformId) throws SQLException {
         List<CartItem> cartItems = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(SqlQueries.GET_CART_ITEMS_BY_USERNAME)) {
-            // Set the username and platform ID for the query
+           
             statement.setString(1, username);
             statement.setInt(2, platformId);
 
-            // Execute the query and iterate through the result set to build the cart items list
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     int cartId = rs.getInt("id");
@@ -68,38 +88,41 @@ public class CartRepository {
                     int quantity = rs.getInt("quantity");
                     double price = rs.getDouble("price");
 
-                    // Create a new CartItem object and add it to the list
+                    
                     CartItem item = new CartItem(cartId, username, productId, quantity, productName, price);
                     cartItems.add(item);
                 }
             }
         } catch (SQLException e) {
-            // Throw the exception to allow the caller to handle it
+  
             throw new SQLException("Error retrieving cart items from the database", e);
         }
         return cartItems;
     }
 
-    /**
-     * Removes a cart item for a given user and product from the cart.
-     *
-     * @param productId  The product ID to remove from the cart.
-     * @param username   The username associated with the cart.
-     * @param platform   The platform associated with the cart.
-     * @return           True if the item was successfully removed, false otherwise.
-     * @throws SQLException if there is an issue with the database operation.
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : removeCartItem
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Removes an item from the user's cart in the database.
+    *  @param          : int productId - The ID of the product to remove.
+    *  @param          : String username - The username of the user.
+    *  @param          : Platform platform - The platform where the item exists.
+    *  @return         : boolean - Returns true if the item was successfully removed.
+    *********************************************************
+    */
     public boolean removeCartItem(int productId, String username, Platform platform) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(SqlQueries.REMOVE_CART_ITEM)) {
-            // Set the parameters for the query
+         
             statement.setInt(1, productId);
             statement.setString(2, username);
             statement.setInt(3, platform.getPlatformId());
 
-            // Execute the delete statement and return true if one or more rows were affected
+   
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            // Throw the exception to allow the caller to handle it
+       
             throw new SQLException("Error removing cart item from the database", e);
         }
     }

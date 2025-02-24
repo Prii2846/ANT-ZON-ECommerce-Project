@@ -1,37 +1,51 @@
 package database;
 
 import java.sql.*;
-
+/*
+*******************************************************************************************************
+*   @Class Name         : DbConnection
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class manages the database connection using JDBC for the eCommerce system.
+*******************************************************************************************************
+*/
 public class DbConnection {
-    // Database connection details
-    private static final String URL = "jdbc:mysql://localhost:3306/ecommerce"; // Database URL
-    private static final String USERNAME = "root";  // Database username
-    private static final String PASSWORD = "Prii2846274@"; // Database password
-    private static Connection connection = null; // Singleton connection instance
+  
+    private static final String URL = "jdbc:mysql://localhost:3306/ecommerce"; 
+    private static final String USERNAME = "root";  
+    private static final String PASSWORD = "Prii2846274@"; 
+    private static Connection connection = null; 
 
-    // Private constructor to prevent instantiation
+ /*
+    *********************************************************
+    *  @Constructor    : DbConnection
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Private constructor to prevent instantiation.
+    *********************************************************
+    */
     private DbConnection() { }
 
-    /**
-     * Get the database connection. 
-     * This method returns a single instance of the connection.
-     * It creates the connection if it does not already exist or if the previous connection is closed.
-     * 
-     * @return The connection object to the database
-     * @throws SQLException If the connection to the database fails
-     * @throws ClassNotFoundException If the MySQL driver is not found
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : getConnection
+    *  @Description    : Establishes and returns a database connection.
+    *  @throws         : SQLException, ClassNotFoundException
+    *  @return         : Connection - The database connection instance.
+    *********************************************************
+    */
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        // Check if the connection is not established or if it is closed
+      
         if (connection == null || connection.isClosed()) {
-            // Load the MySQL JDBC driver
+      
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish the connection to the database
+         
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         }
 
-        // Return the established connection
+      
         return connection;
     }
 }

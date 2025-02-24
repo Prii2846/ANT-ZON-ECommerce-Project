@@ -1,61 +1,154 @@
 package models;
+/*
+*******************************************************************************************************
+*   @Class Name         : WishListItem
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class represents a Wishlist item in the eCommerce platform.
+*                         It contains details like username, product ID, product name, and price.
+*******************************************************************************************************
+*/
 
-// Represents an item in a user's wishlist
 public class WishListItem {
-    private String username;        // Username of the user who added the item to the wishlist
-    private int productId;          // Unique identifier of the product
-    private String productName;     // Name of the product
-    private double productPrice;    // Price of the product
+    private String username;        
+    private int productId;          
+    private String productName;     
+    private double productPrice;   
 
-    // Constructor to initialize a wishlist item with username, product ID, name, and price
+    /*
+    *********************************************************
+    *  @Constructor    : WishListItem
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a Wishlist item with user and product details.
+    *  @param          : String username - Username of the user
+    *                  : int productId - ID of the product
+    *                  : String productName - Name of the product
+    *                  : double productPrice - Price of the product
+    *********************************************************
+    */
     public WishListItem(String username, int productId, String productName, double productPrice) {
-        this.username = username;             // Set the username
-        this.productId = productId;           // Set the product ID
-        this.productName = productName;       // Set the product name
-        this.productPrice = productPrice;     // Set the product price
+        this.username = username;             
+        this.productId = productId;           
+        this.productName = productName;       
+        this.productPrice = productPrice;    
     }
-
-    // Gets the username of the user
+  /*
+    *********************************************************
+    *  @Method Name    : getUsername
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the username.
+    *  @return         : String - Returns the username.
+    *********************************************************
+    */
+  
     public String getUsername() {
         return username;
     }
-
-    // Sets the username of the user
+  /*
+    *********************************************************
+    *  @Method Name    : setUsername
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the username.
+    *  @param          : String username - The username to be set.
+    *********************************************************
+    */
+ 
     public void setUsername(String username) {
-        this.username = username;             // Update the username
+        this.username = username;            
     }
 
-    // Gets the product ID
+    /*
+    *********************************************************
+    *  @Method Name    : getProductId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product ID.
+    *  @return         : int - Returns the product ID.
+    *********************************************************
+    */
     public int getProductId() {
         return productId;
     }
 
-    // Sets the product ID
+     /*
+    *********************************************************
+    *  @Method Name    : setProductId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product ID.
+    *  @param          : int productId - The product ID to be set.
+    *********************************************************
+    */
     public void setProductId(int productId) {
-        this.productId = productId;           // Update the product ID
+        this.productId = productId;          
     }
 
-    // Gets the product name
+   /*
+    *********************************************************
+    *  @Method Name    : getProductName
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product name.
+    *  @return         : String - Returns the product name.
+    *********************************************************
+    */
     public String getProductName() {
         return productName;
     }
 
-    // Sets the product name
+  /*
+    *********************************************************
+    *  @Method Name    : setProductName
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product name.
+    *  @param          : String productName - The product name to be set.
+    *********************************************************
+    */
     public void setProductName(String productName) {
-        this.productName = productName;       // Update the product name
+        this.productName = productName;     
     }
 
-    // Gets the product price
+
+    /*
+    *********************************************************
+    *  @Method Name    : getProductPrice
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product price.
+    *  @return         : double - Returns the product price.
+    *********************************************************
+    */
     public double getProductPrice() {
         return productPrice;
     }
-
-    // Sets the product price
+  /*
+    *********************************************************
+    *  @Method Name    : setProductPrice
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product price.
+    *  @param          : double productPrice - The product price to be set.
+    *********************************************************
+    */
+   
     public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;     // Update the product price
+        this.productPrice = productPrice;   
     }
 
-    // Provides a string representation of the wishlist item
+ /*
+    *********************************************************
+    *  @Method Name    : toString
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Provides a string representation of the WishListItem object.
+    *  @return         : String - Returns the Wishlist item details in string format.
+    *********************************************************
+    */
     @Override
     public String toString() {
         return "WishListItem [productId=" + productId + ", productName=" + productName 

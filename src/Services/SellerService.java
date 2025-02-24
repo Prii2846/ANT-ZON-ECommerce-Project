@@ -5,57 +5,147 @@ import dbRepository.ProductRepository;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : SellerService
+*   @Author             : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class provides functionalities for sellers to manage products,
+*                         including adding, updating, deleting, and retrieving products. It also
+*                         includes methods to fetch best-selling and most-liked products.
+*******************************************************************************************************
+*/
+
 public class SellerService {
-    // Instance of AdminRepository for retrieving statistics like best-selling and most-liked products
+   
     private final AdminRepository adminRepository;
 
-    // Constructor initializes the admin repository
+     /*
+    *********************************************************
+    *  @Constructor    : SellerService
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes the SellerService and establishes 
+    *                   connection with the AdminRepository.
+    *  @throws         : ClassNotFoundException, SQLException
+    *********************************************************
+    */
     public SellerService() throws ClassNotFoundException, SQLException {
         this.adminRepository = new AdminRepository();
     }
 
-    // Instance of ProductRepository for handling product-related operations
+ 
     private final ProductRepository productRepository = new ProductRepository();
 
-    // Adds a new product to the database
+    /*
+    *********************************************************
+    *  @Method Name    : addProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Adds a new product to the platform.
+    *  @param          : Product product - The product details
+    *                  : Platform platform - The platform where the product is added
+    *  @return         : boolean - True if the product is added successfully, otherwise false
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public boolean addProduct(Product product, Platform platform) throws SQLException {
-        // Calls the product repository to add the product to the appropriate platform
         return productRepository.addProduct(product, platform);
     }
-
-    // Retrieves a product by its ID for a specific platform
+ /*
+    *********************************************************
+    *  @Method Name    : getProductById
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a product by its ID and platform.
+    *  @param          : int productId - The product ID
+    *                  : int platformId - The platform ID
+    *  @return         : Product - The product details
+    *  @throws         : SQLException
+    *********************************************************
+    */
+   
     public Product getProductById(int productId, int platformId) throws SQLException {
-        // Calls the product repository to fetch the product details
         return productRepository.getProductById(productId, platformId);
     }
 
-    // Updates an existing product's information
+     /*
+    *********************************************************
+    *  @Method Name    : updateProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Updates the details of an existing product.
+    *  @param          : Product product - The updated product details
+    *                  : Platform platform - The platform where the product exists
+    *  @return         : boolean - True if the product is updated successfully, otherwise false
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public boolean updateProduct(Product product, Platform platform) throws SQLException {
-        // Calls the product repository to update the product details in the database
         return productRepository.updateProduct(product, platform);
     }
 
-    // Deletes a product from the system based on its ID and seller's username
+   /*
+    *********************************************************
+    *  @Method Name    : deleteProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Deletes a product from the platform.
+    *  @param          : int productId - The product ID
+    *                  : String sellerUsername - The seller's username
+    *                  : Platform platform - The platform where the product exists
+    *  @return         : boolean - True if the product is deleted successfully, otherwise false
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public boolean deleteProduct(int productId, String sellerUsername, Platform platform) throws SQLException {
-        // Calls the product repository to remove the product from the seller's inventory
         return productRepository.deleteProduct(productId, sellerUsername, platform);
     }
 
-    // Retrieves all products listed by a specific seller
+    /*
+    *********************************************************
+    *  @Method Name    : getSellerProducts
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of products added by a seller.
+    *  @param          : String sellerUsername - The seller's username
+    *                  : Platform platform - The platform where the products exist
+    *  @return         : List<Product> - List of seller's products
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public List<Product> getSellerProducts(String sellerUsername, Platform platform) throws SQLException {
-        // Calls the product repository to get all products by the seller
         return productRepository.getProductsBySeller(sellerUsername, platform);
     }
-
-    // Retrieves a list of the best-selling products from the admin repository
+  /*
+    *********************************************************
+    *  @Method Name    : getBestSellingProducts
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of the best-selling products.
+    *  @param          : Platform platform - The platform for which best-selling products are fetched
+    *  @return         : List<String> - List of best-selling products
+    *  @throws         : SQLException
+    *********************************************************
+    */
+   
     public List<String> getBestSellingProducts(Platform platform) throws SQLException {
-        // Calls the admin repository to fetch the list of best-selling products for the platform
         return adminRepository.getBestSellingProducts(platform);
     }
 
-    // Retrieves a list of the most-liked products from the admin repository
+    /*
+    *********************************************************
+    *  @Method Name    : getMostLikedProducts
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of the most liked products.
+    *  @param          : Platform platform - The platform for which most liked products are fetched
+    *  @return         : List<String> - List of most liked products
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public List<String> getMostLikedProducts(Platform platform) throws SQLException {
-        // Calls the admin repository to fetch the list of most-liked products for the platform
         return adminRepository.getMostLikedProducts(platform);
     }
 }

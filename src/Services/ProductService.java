@@ -7,42 +7,111 @@ import models.Product;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : ProductService
+*   @Author             : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class provides functionalities for handling products, 
+*                         including adding, retrieving, updating, and deleting products for sellers.
+*******************************************************************************************************
+*/
 public class ProductService {
-    // Repository dependency for handling product operations
+   
     private ProductRepository productRepository;
 
-    // Constructor to initialize the ProductRepository
+   /*
+    *********************************************************
+    *  @Constructor Name : ProductService
+    *  @Author          : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company         : Antrazal
+    *  @Description     : Initializes the product repository for product management.
+    *  @param           : None
+    *  @throws          : ClassNotFoundException, SQLException
+    *********************************************************
+    */   
     public ProductService() throws ClassNotFoundException, SQLException {
         this.productRepository = new ProductRepository();
     }
 
-    // Adds a new product to the system
+  /*
+    *********************************************************
+    *  @Method Name    : addProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Adds a new product for a seller.
+    *  @param          : Product product - The product details
+    *                  : Platform platform - The platform where the product is listed
+    *  @return         : boolean - True if the product is added successfully, otherwise false
+    *********************************************************
+    */
     public boolean addProduct(Product product, Platform platform) {
-        // Calls the ProductRepository's addProduct method to insert the product into the database
+      
         return productRepository.addProduct(product, platform);
     }
-
-    // Retrieves all products added by a specific seller
+ /*
+    *********************************************************
+    *  @Method Name    : getProductsBySeller
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves all products listed by a specific seller.
+    *  @param          : String sellerUsername - The seller's username
+    *                  : Platform platform - The platform where the products are listed
+    *  @return         : List<Product> - List of products added by the seller
+    *********************************************************
+    */
     public List<Product> getProductsBySeller(String sellerUsername, Platform platform) {
-        // Calls the ProductRepository to fetch products based on the seller's username and platform
+      
         return productRepository.getProductsBySeller(sellerUsername, platform);
     }
 
-    // Updates an existing product's details
+    /*
+    *********************************************************
+    *  @Method Name    : updateProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Updates an existing product's details.
+    *  @param          : Product product - The updated product details
+    *                  : Platform platform - The platform where the product is listed
+    *  @return         : boolean - True if the product is updated successfully, otherwise false
+    *********************************************************
+    */
     public boolean updateProduct(Product product, Platform platform) {
-        // Calls the ProductRepository's updateProduct method to modify the product details
+       
         return productRepository.updateProduct(product, platform);
     }
 
-    // Deletes a product from the system
+  /*
+    *********************************************************
+    *  @Method Name    : deleteProduct
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Deletes a product listed by a seller.
+    *  @param          : int id - The product ID to delete
+    *                  : String sellerUsername - The seller's username
+    *                  : Platform platform - The platform where the product is listed
+    *  @return         : boolean - True if the product is deleted successfully, otherwise false
+    *********************************************************
+    */
     public boolean deleteProduct(int id, String sellerUsername, Platform platform) {
-        // Calls the ProductRepository's deleteProduct method to remove the product based on its ID and seller
+       
         return productRepository.deleteProduct(id, sellerUsername, platform);
     }
 
-    // Retrieves a product by its unique ID
+    /*
+    *********************************************************
+    *  @Method Name    : getProductById
+    *  @Author         : Priyanka Kumari (priyanka.kuamri@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a product's details by its ID.
+    *  @param          : int id - The product ID
+    *                  : int platformId - The platform ID where the product is listed
+    *  @return         : Product - The product details or null if not found
+    *********************************************************
+    */
     public Product getProductById(int id, int platformId) {
-        // Calls the ProductRepository to fetch the product details based on its ID and platform
+      
         return productRepository.getProductById(id, platformId);
     }
 }

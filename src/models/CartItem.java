@@ -1,61 +1,121 @@
 package models;
 
-// Represents an item in the shopping cart
+/*
+*******************************************************************************************************
+*   @Class Name         : CartItem
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class represents a cart item in the eCommerce platform, storing details 
+*                         such as cart ID, username, product ID, quantity, product name, and price.
+*******************************************************************************************************
+*/
 public class CartItem {
-    // Unique identifier for the cart item
     private int cartId;
-
-    // Username of the user who owns the cart item
     private String username;
-
-    // Unique identifier for the product
     private int productId;
-
-    // Quantity of the product in the cart
     private int quantity;
-
-    // Name of the product for easy display and reference
     private String productName;
-
-    // Price of the product
     private double price;
 
-    // Constructor to initialize all fields of the CartItem
+
+    /*
+    *********************************************************
+    *  @Constructor    : CartItem
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a CartItem with provided details.
+    *  @param          : int cartId - Unique cart item identifier
+    *                  : String username - User who added the item
+    *                  : int productId - Product ID of the item
+    *                  : int quantity - Quantity of the product
+    *                  : String productName - Name of the product
+    *                  : double price - Price of the product
+    *********************************************************
+    */
     public CartItem(int cartId, String username, int productId, int quantity, String productName, double price) {
-        this.cartId = cartId;                   // Initialize cart ID
-        this.username = username;               // Set the username
-        this.productId = productId;             // Set the product ID
-        this.quantity = quantity;               // Set the quantity of the product
-        this.productName = productName;         // Set the product name
-        this.price = price;                     // Set the product price
+        this.cartId = cartId;                   
+        this.username = username;              
+        this.productId = productId;             
+        this.quantity = quantity;               
+        this.productName = productName;       
+        this.price = price;                     
     }
 
-    // Getter for cartId
+  /*
+    *********************************************************
+    *  @Method Name    : getCartId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the cart item ID.
+    *  @return         : int - Returns the unique cart ID.
+    *********************************************************
+    */
     public int getCartId() {
         return cartId;
     }
 
-    // Getter for username
+  /*
+    *********************************************************
+    *  @Method Name    : getUsername
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the username of the user who added the item to the cart.
+    *  @return         : String - Returns the username.
+    *********************************************************
+    */
     public String getUsername() {
         return username;
     }
-
-    // Getter for productId
+  /*
+    *********************************************************
+    *  @Method Name    : getProductId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product ID of the cart item.
+    *  @return         : int - Returns the product ID.
+    *********************************************************
+    */
+   
     public int getProductId() {
         return productId;
     }
 
-    // Getter for quantity
+    /*
+    *********************************************************
+    *  @Method Name    : getQuantity
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the quantity of the product in the cart.
+    *  @return         : int - Returns the quantity.
+    *********************************************************
+    */
     public int getQuantity() {
         return quantity;
     }
-
-    // Getter for productName
+ /*
+    *********************************************************
+    *  @Method Name    : getProductName
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the name of the product in the cart.
+    *  @return         : String - Returns the product name.
+    *********************************************************
+    */
     public String getProductName() {
         return productName;
     }
 
-    // Getter for price
+
+    /*
+    *********************************************************
+    *  @Method Name    : getPrice
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the price of the product in the cart.
+    *  @return         : double - Returns the price of the product.
+    *********************************************************
+    */
     public double getPrice() {
         return price;
     }

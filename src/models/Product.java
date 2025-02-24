@@ -1,131 +1,267 @@
 package models;
 
-// Represents a product in the eCommerce system
+
+/*
+*******************************************************************************************************
+*   @Class Name         : Product
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class represents a product in the eCommerce system with details like 
+*                         name, category, stock, price, and seller information.
+*******************************************************************************************************
+*/
 public class Product {
-    // Unique identifier for the product
+  
     private int id;
-
-    // The name of the product
     private String productName;
-
-    // The main category of the product (e.g., Electronics, Furniture)
     private String mainCategory;
-
-    // The subcategory of the product (e.g., Mobile, Laptops)
     private String subCategory;
-
-    // The specific product type (e.g., Smartphone_Android, Gaming_Laptop)
     private String productType;
-
-    // The stock quantity of the product
     private int stock;
-
-    // The price of the product
     private double price;
-
-    // The username of the seller who listed the product
     private String sellerUsername;
 
-    // Constructor to initialize all fields of the product
+    /*
+    *********************************************************
+    *  @Constructor    : Product
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a Product with all necessary details.
+    *  @param          : int id - Unique product identifier
+    *                  : String productName - Name of the product
+    *                  : String mainCategory - Main category of the product
+    *                  : String subCategory - Subcategory of the product
+    *                  : String productType - Type of the product
+    *                  : int stock - Stock quantity of the product
+    *                  : double price - Price of the product
+    *                  : String sellerUsername - Seller associated with the product
+    *********************************************************
+    */
     public Product(int id, String productName, String mainCategory, String subCategory, 
                    String productType, int stock, double price, String sellerUsername) {
-        this.id = id;                               // Set the product ID
-        this.productName = productName;             // Set the product name
-        this.mainCategory = mainCategory;           // Set the main category
-        this.subCategory = subCategory;             // Set the subcategory
-        this.productType = productType;             // Set the product type
-        this.stock = stock;                         // Set the stock quantity
-        this.price = price;                         // Set the product price
-        this.sellerUsername = sellerUsername;       // Set the seller's username
+        this.id = id;                               
+        this.productName = productName;           
+        this.mainCategory = mainCategory;           
+        this.subCategory = subCategory;            
+        this.productType = productType;           
+        this.stock = stock;                         
+        this.price = price;                        
+        this.sellerUsername = sellerUsername;     
     }
 
-    // Overloaded constructor for simplified product initialization
+     /*
+    *********************************************************
+    *  @Constructor    : Product
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a Product with product type and stock only.
+    *  @param          : String productType - Type of the product
+    *                  : int stock - Stock quantity of the product
+    *********************************************************
+    */
     public Product(String productType, int stock) {
-        this.productType = productType;             // Set the product type
-        this.stock = stock;                         // Set the stock quantity
+        this.productType = productType;            
+        this.stock = stock;                         
     }
 
-    // Getter for product ID
+  /*
+    *********************************************************
+    *  @Method Name    : getId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product ID.
+    *  @return         : int - Returns the unique product ID.
+    *********************************************************
+    */
     public int getId() {
         return id;
     }
 
-    // Setter for product ID
+     /*
+    *********************************************************
+    *  @Method Name    : setId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product ID.
+    *  @param          : int id - The unique product ID to be set.
+    *********************************************************
+    */
     public void setId(int id) {
-        this.id = id;  // Update the product ID
+        this.id = id;  
     }
 
-    // Getter for product name
+    /*
+    *********************************************************
+    *  @Method Name    : getProductName
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product name.
+    *  @return         : String - Returns the name of the product.
+    *********************************************************
+    */
     public String getProductName() {
         return productName;
     }
-
-    // Setter for product name
+ /*
+    *********************************************************
+    *  @Method Name    : setProductName
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product name.
+    *  @param          : String productName - The name of the product to be set.
+    *********************************************************
+    */
     public void setProductName(String productName) {
-        this.productName = productName;  // Update the product name
+        this.productName = productName; 
     }
 
-    // Getter for main category
+   /*
+    *********************************************************
+    *  @Method Name    : getMainCategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the main category of the product.
+    *  @return         : String - Returns the main category.
+    *********************************************************
+    */
     public String getMainCategory() {
         return mainCategory;
     }
 
-    // Setter for main category
+  
+   /*
+    *********************************************************
+    *  @Method Name    : setMainCategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the main category of the product.
+    *  @param          : String mainCategory - The main category to be set.
+    *********************************************************
+    */
     public void setMainCategory(String mainCategory) {
-        this.mainCategory = mainCategory;  // Update the main category
+        this.mainCategory = mainCategory;  
     }
-
-    // Getter for subcategory
+/*
+    *********************************************************
+    *  @Method Name    : getSubCategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the sub category of the product.
+    *  @return         : String - Returns the sub category.
+    *********************************************************
+    */
     public String getSubCategory() {
         return subCategory;
     }
-
-    // Setter for subcategory
+ /*
+    *********************************************************
+    *  @Method Name    : setSubCategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the sub category of the product.
+    *  @param          : String subCategory - The sub category to be set.
+    *********************************************************
+    */
     public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;  // Update the subcategory
+        this.subCategory = subCategory;  
     }
 
-    // Getter for product type
+    /*
+    *********************************************************
+    *  @Method Name    : getProductType
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the product type.
+    *  @return         : String - Returns the type of the product.
+    *********************************************************
+    */
     public String getProductType() {
         return productType;
     }
 
-    // Setter for product type
+   /*
+    *********************************************************
+    *  @Method Name    : setProductType
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the product type.
+    *  @param          : String productType - The type of the product to be set.
+    *********************************************************
+    */
     public void setProductType(String productType) {
-        this.productType = productType;  // Update the product type
+        this.productType = productType; 
     }
 
-    // Getter for stock quantity
+    /*
+    *********************************************************
+    *  @Method Name    : getStock
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the stock quantity of the product.
+    *  @return         : int - Returns the stock quantity.
+    *********************************************************
+    */
     public int getStock() {
         return stock;
     }
 
-    // Setter for stock quantity
+     /*
+    *********************************************************
+    *  @Method Name    : setStock
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the stock quantity of the product.
+    *  @param          : int stock - The stock quantity to be set.
+    *********************************************************
+    */
     public void setStock(int stock) {
-        this.stock = stock;  // Update the stock quantity
+        this.stock = stock; 
     }
 
-    // Getter for product price
+    /*
+    *********************************************************
+    *  @Method Name    : getPrice
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the price of the product.
+    *  @return         : double - Returns the price.
+    *********************************************************
+    */
     public double getPrice() {
         return price;
     }
+  /*
+    *********************************************************
+    *  @Method Name    : setPrice
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : set the price of the product.
+    *  @return         : double - the price to be set.
+    *********************************************************
+    */
 
-    // Setter for product price
     public void setPrice(double price) {
-        this.price = price;  // Update the product price
+        this.price = price; 
     }
 
-    // Getter for seller's username
+
     public String getSellerUsername() {
         return sellerUsername;
     }
 
-    // Setter for seller's username
+
     public void setSellerUsername(String sellerUsername) {
-        this.sellerUsername = sellerUsername;  // Update the seller's username
+        this.sellerUsername = sellerUsername;  
     }
 
-    // Overrides the default toString method to display product details
+    /*
+    *********************************************************
+    *  @Method Name    : toString
+    *  @Description    : Returns a string representation of the product.
+    *  @return         : String - Formatted product details.
+    *********************************************************
+    */ 
     @Override
     public String toString() {
         return "Product [id=" + id + ", productName=" + productName + ", mainCategory=" + mainCategory

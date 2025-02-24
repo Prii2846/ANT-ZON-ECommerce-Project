@@ -5,66 +5,90 @@ import Utils.InputScanner;
 import Constant.Printer;
 import java.sql.SQLException;
 
+
+/*
+    *******************************************************************************************************
+    *   @Class Name         : SellerView
+    *   @Author             : Priyanka Kumari (Priyanka.Kumari@antrazal.com)
+    *   @Company            : Antrazal
+    *   @Date               : 22-02-2025
+    *   @Description        : This class manages the Seller functionalities, allowing users to 
+    *                         add, update, delete, and view products, as well as check sales statistics.
+    *******************************************************************************************************
+*/
 public class SellerView {
-    // Singleton instance of InputScanner to handle user input
+
     private static final InputScanner inputScanner = InputScanner.getInstance();
-
-    // Instance of SellerController to handle seller-related operations
     private SellerController sellerController;
-
-    // The platform on which the seller is operating (Amazon, Flipkart, ANT-ZON, etc.)
     private final Platform platform;
 
-    // Constructor to initialize the SellerView with the selected platform
-      // Constructor to initialize the SellerView with the selected platform
+  /*
+    *********************************************************
+     *  @Constructor   : SellerView
+     *  @Author        : Priyanka Kumari (Priyanka.Kumari@antrazal.com)
+     *  @Company       : Antrazal
+     *  @Description   : Initializes the SellerView with a Platform instance.
+     *                  It also initializes the SellerController to handle operations.
+     *  @param         : Platform platform
+     *  @return        : N/A                   
+    *********************************************************
+    */
     public SellerView(Platform platform) {
         this.platform = platform;
-        // Catching exceptions during SellerController instantiation
         try {
             this.sellerController = new SellerController();
         } catch (SQLException | ClassNotFoundException e) {
-            // Handle the exception (logging, user feedback, etc.)
-            e.printStackTrace();  // You can log the error or handle it in another way
-            // You may also choose to rethrow the exception or display a user-friendly message
+           
+            e.printStackTrace();
         }
     }
 
-    // Displays the seller's dashboard menu and handles their actions
+  /*
+    *********************************************************
+     *  @Method Name   : showSellerMenu
+     *  @Author        : Priyanka Kumari (Priyanka.Kumari@antrazal.com)
+     *  @Company       : Antrazal
+     *  @Description   : Displays the Seller menu and processes user choices.
+     *                  Allows the seller to manage products and view statistics.
+     *  @param         : String sellerUsername
+     *  @return        : N/A                   
+    *********************************************************
+    */
     public void showSellerMenu(String sellerUsername) throws SQLException, ClassNotFoundException {
         while (true) {
-            // Display the seller's dashboard with options
+            
             Printer.printSellerDashboard(sellerUsername);
-            // Read the user's choice from the menu
+         
             int choice = inputScanner.readInt("Enter your choice: ");
 
-            // Process the user's choice
+           
             switch (choice) {
-                case 1: // Option to add a new product
+                case 1: 
                     sellerController.addProduct(sellerUsername, platform);
                     break;
-                case 2: // Option to view all products
+                case 2: 
                     sellerController.viewProducts(sellerUsername, platform);
                     break;
-                case 3: // Option to update an existing product
+                case 3: 
                     sellerController.updateProduct(sellerUsername, platform);
                     break;
-                case 4: // Option to delete a product
+                case 4: 
                     sellerController.deleteProduct(sellerUsername, platform);
                     break;
-                case 5: // Option to view the best-selling products
+                case 5:
                     sellerController.showBestSellingProducts(platform);
                     break;
-                case 6: // Option to view the most liked products
+                case 6: 
                     sellerController.showMostLikedProducts(platform);
                     break;
-                case 7: // Option to go back to the login menu
+                case 7: 
                     ShowLoginMenu.showLoginMenu();
                     break;
-                case 8: // Option to exit the application
+                case 8: 
                     Printer.printExitMessage();
                     System.exit(0);
                     break;
-                default: // Invalid choice handler
+                default: 
                     Printer.printInvalidChoice();
                     break;
             }

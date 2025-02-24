@@ -4,23 +4,43 @@ import java.util.*;
 import Constant.SqlQueries;
 import database.*;
 import models.*;
+/*
+*******************************************************************************************************
+*   @Class Name         : AdminRepository
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class handles admin-related database operations, including revenue 
+*                         statistics, user management, and product inventory tracking.
+*******************************************************************************************************
+*/
 
 public class AdminRepository {
 
     private final Connection connection;
 
-    // Constructor to establish database connection
+  /*
+    *********************************************************
+    *  @Constructor    : AdminRepository
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Establishes a database connection for admin operations.
+    *********************************************************
+    */
     public AdminRepository() throws ClassNotFoundException, SQLException {
         this.connection = DbConnection.getConnection();
     }
-
-    /**
-     * Get the total revenue for the specified platform.
-     * 
-     * @param platform The platform for which revenue is calculated.
-     * @return Total revenue as a double.
-     * @throws SQLException If any database error occurs.
-     */
+ /*
+    *********************************************************
+    *  @Method Name    : getTotalRevenue
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the total revenue for the specified platform.
+    *  @param          : Platform platform - The platform for which revenue is calculated.
+    *  @return         : double - Returns the total revenue amount.
+    *********************************************************
+    */
+   
     public double getTotalRevenue(Platform platform) throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.TOTAL_REVENUE_QUERY)) {
             stmt.setInt(1, platform.getPlatformId());
@@ -29,14 +49,17 @@ public class AdminRepository {
             }
         }
     }
-
-    /**
-     * Get revenue by main category for the specified platform.
-     * 
-     * @param platform The platform for which revenue is retrieved.
-     * @return A map of category names and their corresponding revenues.
-     * @throws SQLException If any database error occurs.
-     */
+ /*
+    *********************************************************
+    *  @Method Name    : getRevenueByCategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves revenue statistics grouped by main category.
+    *  @param          : Platform platform - The platform for which revenue is calculated.
+    *  @return         : Map<String, Double> - Returns a map with category names as keys and revenue as values.
+    *********************************************************
+    */
+  
     public Map<String, Double> getRevenueByCategory(Platform platform) throws SQLException {
         Map<String, Double> revenueMap = new HashMap<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.REVENUE_BY_CATEGORY_QUERY)) {
@@ -49,14 +72,17 @@ public class AdminRepository {
         }
         return revenueMap;
     }
-
-    /**
-     * Get revenue by subcategory for the specified platform.
-     * 
-     * @param platform The platform for which revenue is retrieved.
-     * @return A map of subcategory names and their corresponding revenues.
-     * @throws SQLException If any database error occurs.
-     */
+ /*
+    *********************************************************
+    *  @Method Name    : getRevenueBySubcategory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves revenue statistics grouped by subcategory.
+    *  @param          : Platform platform - The platform for which revenue is calculated.
+    *  @return         : Map<String, Double> - Returns a map with subcategory names as keys and revenue as values.
+    *********************************************************
+    */
+ 
     public Map<String, Double> getRevenueBySubcategory(Platform platform) throws SQLException {
         Map<String, Double> revenueMap = new HashMap<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.REVENUE_BY_SUBCATEGORY_QUERY)) {
@@ -69,14 +95,17 @@ public class AdminRepository {
         }
         return revenueMap;
     }
-
-    /**
-     * Get the list of best-selling products for the specified platform.
-     * 
-     * @param platform The platform for which best-selling products are retrieved.
-     * @return A list of best-selling product details.
-     * @throws SQLException If any database error occurs.
-     */
+/*
+    *********************************************************
+    *  @Method Name    : getBestSellingProducts
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of best-selling products based on sales volume.
+    *  @param          : Platform platform - The platform for which data is fetched.
+    *  @return         : List<String> - Returns a list of best-selling product details.
+    *********************************************************
+    */
+  
     public List<String> getBestSellingProducts(Platform platform) throws SQLException {
         List<String> products = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.BEST_SELLING_PRODUCTS_QUERY)) {
@@ -89,14 +118,16 @@ public class AdminRepository {
         }
         return products;
     }
-
-    /**
-     * Get the list of most liked products for the specified platform.
-     * 
-     * @param platform The platform for which most liked products are retrieved.
-     * @return A list of most liked product details.
-     * @throws SQLException If any database error occurs.
-     */
+/*
+    *********************************************************
+    *  @Method Name    : getMostLikedProducts
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of most liked products based on user likes.
+    *  @param          : Platform platform - The platform for which data is fetched.
+    *  @return         : List<String> - Returns a list of most liked product details.
+    *********************************************************
+    */
     public List<String> getMostLikedProducts(Platform platform) throws SQLException {
         List<String> products = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.MOST_LIKED_PRODUCTS_QUERY)) {
@@ -110,13 +141,16 @@ public class AdminRepository {
         return products;
     }
 
-    /**
-     * Get the list of top-selling sellers for the specified platform.
-     * 
-     * @param platform The platform for which top-selling sellers are retrieved.
-     * @return A list of top-selling seller details.
-     * @throws SQLException If any database error occurs.
-     */
+   /*
+    *********************************************************
+    *  @Method Name    : getTopSellingSellers
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves a list of top-selling sellers.
+    *  @param          : Platform platform - The platform for which data is fetched.
+    *  @return         : List<String> - List of top-selling sellers.
+    *********************************************************
+    */
     public List<String> getTopSellingSellers(Platform platform) throws SQLException {
         List<String> sellers = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.TOP_SELLING_SELLERS_QUERY)) {
@@ -129,13 +163,16 @@ public class AdminRepository {
         }
         return sellers;
     }
-
-    /**
-     * Get the list of all users in the system.
-     * 
-     * @return A list of all users.
-     * @throws SQLException If any database error occurs.
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getAllUsers
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves all users from the database.
+    *  @return         : List<User> - List of users.
+    *********************************************************
+    */
+   
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(SqlQueries.ALL_USERS_QUERY)) {
@@ -147,14 +184,16 @@ public class AdminRepository {
         }
         return users;
     }
-
-    /**
-     * Get the list of low-stock products for the specified platform.
-     * 
-     * @param platform The platform for which low-stock products are retrieved.
-     * @return A list of low-stock product details.
-     * @throws SQLException If any database error occurs.
-     */
+  /*
+    *********************************************************
+    *  @Method Name    : getLowStockProducts
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves products that are running low on stock.
+    *  @param          : Platform platform - The platform for which data is fetched.
+    *  @return         : List<Product> - Returns a list of low-stock products.
+    *********************************************************
+    */
     public List<Product> getLowStockProducts(Platform platform) throws SQLException {
         List<Product> lowStockProducts = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(SqlQueries.LOW_STOCK_PRODUCTS_QUERY)) {
@@ -170,13 +209,16 @@ public class AdminRepository {
         return lowStockProducts;
     }
 
-    /**
-     * Get the list of out-of-stock products for the specified platform.
-     * 
-     * @param platform The platform for which out-of-stock products are retrieved.
-     * @return A list of out-of-stock product details.
-     * @throws SQLException If any database error occurs.
-     */
+      /*
+    *********************************************************
+    *  @Method Name    : getOutOfStockProducts
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves products that are completely out of stock.
+    *  @param          : Platform platform - The platform for which data is fetched.
+    *  @return         : List<Product> - Returns a list of out-of-stock products.
+    *********************************************************
+    */
     public List<Product> getOutOfStockProducts(Platform platform) throws SQLException {
         List<Product> productList = new ArrayList<>();
         try (PreparedStatement pstmt = connection.prepareStatement(SqlQueries.OUT_OF_STOCK_PRODUCTS_QUERY)) {

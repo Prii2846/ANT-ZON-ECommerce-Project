@@ -6,50 +6,70 @@ import models.*;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : CartService
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class provides functionalities for cart operations, 
+*                         including adding, removing, viewing cart items, and handling checkout.
+*******************************************************************************************************
+*/
 public class CartService {
-    private static CartService instance; // Singleton instance of CartService
-    private final CartRepository cartRepository; // Repository to manage cart data
-    private static ProductRepository productRepository; // Repository to manage product data
+    private static CartService instance; 
+    private final CartRepository cartRepository; 
+    private static ProductRepository productRepository; 
 
-    // Private constructor for singleton pattern
+      /*
+    *********************************************************
+    *  @Constructor Name : CartService
+    *  @Author          : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company         : Antrazal
+    *  @Description     : Initializes the CartRepository instance for database operations.
+    *  @param           : None
+    *  @throws          : ClassNotFoundException, SQLException
+    *********************************************************
+    */
     private CartService() throws ClassNotFoundException, SQLException {
         this.cartRepository = new CartRepository();
         this.productRepository = new ProductRepository();
     }
 
-    // Get the singleton instance of CartService
+  
     public static CartService getInstance() throws ClassNotFoundException, SQLException {
         if (instance == null) {
-            instance = new CartService(); // Create instance if not already created
+            instance = new CartService(); 
         }
         return instance;
     }
 
-    /**
-     * Adds a product to the user's cart.
-     *
-     * @param username  The username of the buyer.
-     * @param productId The ID of the product to add.
-     * @param quantity  The quantity of the product to add.
-     * @param platform  The eCommerce platform being used.
-     * @throws SQLException if the product is not found or out of stock.
-     */
+      /*
+    *********************************************************
+    *  @Method Name    : addToCart
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Adds a product to the cart.
+    *  @param          : User user - The user adding the product
+    *                  : Product product - The product to be added
+    *  @return         : boolean - True if added successfully, otherwise false
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public boolean addToCart(String username, int productId, int quantity, Platform platform) throws SQLException {
-        // Fetch the product from the repository by its ID and platform
+       
         Product product = productRepository.getProductById(productId, platform.getPlatformId());
-        if (product == null) { // Check if product exists
+        if (product == null) { 
             throw new SQLException("Product not found.");
         }
 
-        // Check if the requested quantity is available in stock
+       
         if (product.getStock() < quantity) {
             throw new SQLException("Product is out of stock.");
         }
 
-        // Create a CartItem object for the cart entry
         CartItem cartItem = new CartItem(0, username, productId, quantity, product.getProductName(), product.getPrice());
 
-        // Add the CartItem to the cart using the repository
         boolean isAdded = cartRepository.addCartItem(cartItem, platform);
 
         if (!isAdded) {
@@ -59,22 +79,26 @@ public class CartService {
         return true;
     }
 
-    /**
-     * Displays the contents of the user's cart.
-     *
-     * @param username The username of the buyer.
-     * @param platform The eCommerce platform being used.
-     * @throws SQLException If an error occurs while fetching cart items from the database.
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : viewCart
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the list of products in a user's cart.
+    *  @param          : User user - The user whose cart is being viewed
+    *  @return         : List<Product> - List of products in the cart
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public void viewCart(String username, Platform platform) throws SQLException {
-        // Fetch all cart items for the given username and platform
+       
         List<CartItem> cartItems = cartRepository.getCartItemsByUsername(username, platform.getPlatformId());
 
         if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty.");
         } else {
             System.out.println("Cart Items:");
-            // Loop through each cart item and display its details
+         
             for (CartItem item : cartItems) {
                 System.out.println("Product ID: " + item.getProductId() +
                                    " | Product: " + item.getProductName() +
@@ -84,16 +108,20 @@ public class CartService {
         }
     }
 
-    /**
-     * Removes a product from the user's cart.
-     *
-     * @param productId The ID of the product to remove.
-     * @param username  The username of the buyer.
-     * @param platform  The eCommerce platform being used.
-     * @throws SQLException if the item could not be removed.
-     */
+     /*
+    *********************************************************
+    *  @Method Name    : removeFromCart
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Removes a product from the cart.
+    *  @param          : User user - The user removing the product
+    *                  : Product product - The product to be removed
+    *  @return         : boolean - True if removed successfully, otherwise false
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public boolean removeFromCart(int productId, String username, Platform platform) throws SQLException {
-        // Attempt to remove the item from the cart using the repository
+       
         boolean isRemoved = cartRepository.removeCartItem(productId, username, platform);
 
         if (!isRemoved) {
@@ -103,14 +131,9 @@ public class CartService {
         return true;
     }
 
-    /**
-     * Displays all available products on the platform.
-     *
-     * @param platform The eCommerce platform being used.
-     * @throws SQLException If an error occurs while fetching products from the database.
-     */
+  
     public static void viewAllProducts(Platform platform) throws SQLException {
-        // Fetch all products for the given platform
+     
         List<Product> products = productRepository.getAllProducts(platform);
 
         if (products.isEmpty()) {
@@ -118,7 +141,7 @@ public class CartService {
         } else {
             System.out.println("\nAvailable Products:");
 
-            // Print table headers for product details
+           
             System.out.printf("%-5s %-20s %-15s %-15s %-20s %-10s %-10s %-15s\n", 
                 "ID", "Product Name", "Main Category", "Sub Category", 
                 "Product Type", "Stock", "Price", "Seller Username");
@@ -126,7 +149,7 @@ public class CartService {
             System.out.println("-------------------------------------------------------------------------------------------"
              + "---------------------------------------------------");
 
-            // Loop through each product and display its details in tabular format
+
             for (Product product : products) {
                 System.out.printf("%-5d %-20s %-15s %-15s %-20s %-10d %-10.2f %-15s\n", 
                     product.getId(), product.getProductName(), product.getMainCategory(), 

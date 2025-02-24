@@ -102,9 +102,8 @@ public class Printer {
         System.out.println("4. Delete Product");
         System.out.println("5. View Best-Selling Products"); 
         System.out.println("6. View Most Liked Products");  
-        System.out.println("7. Logout");
-        System.out.println("8. Back");
-        System.out.println("9. Exit");
+        System.out.println("7. Back");
+        System.out.println("8. Exit");
 
     }
 

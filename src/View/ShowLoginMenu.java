@@ -6,121 +6,183 @@ import Constant.Printer;
 import models.Platform;
 import java.sql.SQLException;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : ShowLoginMenu
+*   @Author             : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class provides the main login interface where users can select their platform
+*                         and log in as Admin, Seller, or Buyer.
+*******************************************************************************************************
+*/
 public class ShowLoginMenu {
-    // Singleton instance of InputScanner to handle user input
+   
     private static final InputScanner input = InputScanner.getInstance();
 
-    // Variable to store the selected platform (Amazon, Flipkart, ANT-ZON, etc.)
+
     private static Platform selectedPlatform = null;
 
-    // Displays the platform selection menu and allows the user to choose a platform
+  /*
+    *********************************************************
+    *  @Method Name    : showPlatformMenu
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Displays the platform selection menu where the user selects Amazon, Flipkart, or ANT-ZON.
+    *  @param          : None
+    *  @return         : void
+    *********************************************************
+    */
     public static void showPlatformMenu() throws SQLException, ClassNotFoundException {
         while (true) {
-            System.out.println(Printer.showPlatformMenu());  // Show available platforms
-            int choice = input.readInt("Enter your choice: ");  // Read user input for choice
+            System.out.println(Printer.showPlatformMenu());  
+            int choice = input.readInt("Enter your choice: ");  
             switch (choice) {
-                case 1 -> selectedPlatform = new Platform(1, "Amazon");  // Set selected platform to Amazon
-                case 2 -> selectedPlatform = new Platform(2, "Flipkart"); // Set selected platform to Flipkart
-                case 3 -> selectedPlatform = new Platform(3, "ANT-ZON");  // Set selected platform to ANT-ZON
-                case 4 -> {  // Exit option
-                    Printer.printExitMessage();  // Print exit message
-                    System.exit(0);  // Terminate the application
+                case 1 -> selectedPlatform = new Platform(1, "Amazon");  
+                case 2 -> selectedPlatform = new Platform(2, "Flipkart"); 
+                case 3 -> selectedPlatform = new Platform(3, "ANT-ZON");  
+                case 4 -> {  
+                    Printer.printExitMessage(); 
+                    System.exit(0);  
                 }
-                default -> Printer.printInvalidChoice();  // Invalid choice, ask again
+                default -> Printer.printInvalidChoice(); 
             }
-            showLoginMenu();  // After selecting a platform, show the login menu
+            showLoginMenu();  
         }
     }
 
-    // Displays the login menu where the user can choose to login as Admin, Seller, or Buyer
+  
+    /*
+    *********************************************************
+    *  @Method Name    : showLoginMenu
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Displays the login menu and directs users to their respective login sections.
+    *  @param          : None
+    *  @return         : void
+    *********************************************************
+    */
     public static void showLoginMenu() throws SQLException, ClassNotFoundException {
         while (true) {
-            System.out.println(Printer.printMainMenu());  // Show the main menu options
-            int choice = input.readInt("Enter your choice: ");  // Read user input for choice
+            System.out.println(Printer.printMainMenu());  
+            int choice = input.readInt("Enter your choice: ");  
             switch (choice) {
-                case 1 -> handleAdminMenu();  // Handle admin login and registration
-                case 2 -> handleSellerMenu(); // Handle seller login and registration
-                case 3 -> handleBuyerMenu();  // Handle buyer login and registration
-                case 4 -> showPlatformMenu();  // Go back to the platform selection menu
-                case 5 -> {  // Exit option
-                    Printer.printExitMessage();  // Print exit message
-                    System.exit(0);  // Terminate the application
+                case 1 -> handleAdminMenu();  
+                case 2 -> handleSellerMenu(); 
+                case 3 -> handleBuyerMenu();  
+                case 4 -> showPlatformMenu();  
+                case 5 -> { 
+                    Printer.printExitMessage(); 
+                    System.exit(0);  
                 }
-                default -> Printer.printInvalidChoice();  // Invalid choice, ask again
+                default -> Printer.printInvalidChoice();  
             }
         }
     }
-
-    // Handles the admin menu options for registration, login, and navigation
+   /*
+    *********************************************************
+    *  @Method Name    : handleAdminMenu
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Handles the login and registration flow for Admin users.
+    *  @param          : None
+    *  @return         : void
+    *********************************************************
+    */
+ 
     private static void handleAdminMenu() throws SQLException, ClassNotFoundException {
-        System.out.println(Printer.printAdminMenu());  // Show admin-specific menu options
-        int choice = input.readInt("Enter your choice for Admin: ");  // Read admin choice
+        System.out.println(Printer.printAdminMenu());  
+        int choice = input.readInt("Enter your choice for Admin: "); 
         switch (choice) {
-            case 1 -> UserController.registerUser("Admin", selectedPlatform);  // Admin registration
-            case 2 -> {  // Admin login
+            case 1 -> UserController.registerUser("Admin", selectedPlatform);  
+            case 2 -> {  
                 String adminUsername = UserController.loginUser("Admin", selectedPlatform);
-                if (adminUsername != null) {  // If login is successful
-                    AdminView adminView = new AdminView(selectedPlatform);  // Create Admin view object
-                    adminView.showAdminMenu(adminUsername);  // Show admin menu
+                if (adminUsername != null) { 
+                    AdminView adminView = new AdminView(selectedPlatform);  
+                    adminView.showAdminMenu(adminUsername);  
                 }
             }
-            case 3 -> showLoginMenu();  // Go back to the login menu
-            case 4 -> {  // Exit option
-                Printer.printExitMessage();  // Print exit message
-                System.exit(0);  // Terminate the application
+            case 3 -> showLoginMenu();  
+            case 4 -> { 
+                Printer.printExitMessage();  
+                System.exit(0);  
             }
-            default -> Printer.printInvalidChoice();  // Invalid choice, ask again
+            default -> Printer.printInvalidChoice();  
         }
     }
-
-    // Handles the seller menu options for registration, login, and navigation
+    /*
+    *********************************************************
+    *  @Method Name    : handleSellerMenu
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Handles the login and registration flow for Seller users.
+    *  @param          : None
+    *  @return         : void
+    *********************************************************
+    */
     private static void handleSellerMenu() throws SQLException, ClassNotFoundException {
-        System.out.println(Printer.printSellerMenu());  // Show seller-specific menu options
-        int choice = input.readInt("Enter your choice for Seller: ");  // Read seller choice
+        System.out.println(Printer.printSellerMenu());  
+        int choice = input.readInt("Enter your choice for Seller: ");  
         switch (choice) {
-            case 1 -> UserController.registerUser("Seller", selectedPlatform);  // Seller registration
-            case 2 -> {  // Seller login
+            case 1 -> UserController.registerUser("Seller", selectedPlatform);  
+            case 2 -> {  
                 String sellerUsername = UserController.loginUser("Seller", selectedPlatform);
-                if (sellerUsername != null) {  // If login is successful
-                    SellerView sellerView = new SellerView(selectedPlatform);  // Create Seller view object
-                    sellerView.showSellerMenu(sellerUsername);  // Show seller menu
+                if (sellerUsername != null) { 
+                    SellerView sellerView = new SellerView(selectedPlatform);  
+                    sellerView.showSellerMenu(sellerUsername); 
                 }
             }
-            case 3 -> showLoginMenu();  // Go back to the login menu
-            case 4 -> {  // Exit option
-                Printer.printExitMessage();  // Print exit message
-                System.exit(0);  // Terminate the application
+            case 3 -> showLoginMenu();  
+            case 4 -> {  
+                Printer.printExitMessage();  
+                System.exit(0);  
             }
-            default -> Printer.printInvalidChoice();  // Invalid choice, ask again
+            default -> Printer.printInvalidChoice(); 
         }
     }
 
-    // Handles the buyer menu options for registration, login, and navigation
+      /*
+    *********************************************************
+    *  @Method Name    : handleBuyerMenu
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Handles the login and registration flow for Buyer users.
+    *  @param          : None
+    *  @return         : void
+    *********************************************************
+    */
     private static void handleBuyerMenu() throws SQLException, ClassNotFoundException {
-        System.out.println(Printer.printBuyerMenu());  // Show buyer-specific menu options
-        int choice = input.readInt("Enter your choice for Buyer: ");  // Read buyer choice
+        System.out.println(Printer.printBuyerMenu()); 
+        int choice = input.readInt("Enter your choice for Buyer: ");  
         switch (choice) {
-            case 1 -> UserController.registerUser("Buyer", selectedPlatform);  // Buyer registration
-            case 2 -> {  // Buyer login
+            case 1 -> UserController.registerUser("Buyer", selectedPlatform);  
+            case 2 -> {  
                 String buyerUsername = UserController.loginUser("Buyer", selectedPlatform);
-                if (buyerUsername != null) {  // If login is successful
-                    BuyerController buyerController = new BuyerController();  // Create Buyer controller
-                    // Pass BuyerController to BuyerView
+                if (buyerUsername != null) {  
+                    BuyerController buyerController = new BuyerController();  
                     BuyerView buyerView = new BuyerView(buyerController);
-                    // Show buyer menu
                     buyerView.showBuyerMenu(buyerUsername, selectedPlatform);
                 }
             }
-            case 3 -> showLoginMenu();  // Go back to the login menu
-            case 4 -> {  // Exit option
-                Printer.printExitMessage();  // Print exit message
-                System.exit(0);  // Terminate the application
+            case 3 -> showLoginMenu();  
+            case 4 -> {  
+                Printer.printExitMessage();  
+                System.exit(0);  
             }
-            default -> Printer.printInvalidChoice();  // Invalid choice, ask again
+            default -> Printer.printInvalidChoice();  
         }
     }
-
-    // Getter method for the selected platform
+  /*
+    *********************************************************
+    *  @Method Name    : getSelectedPlatform
+    *  @Author         : <Priyanka Kumari> (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Returns the currently selected platform.
+    *  @param          : None
+    *  @return         : Platform (selected platform)
+    *********************************************************
+    */
+   
     public static Platform getSelectedPlatform() {
         return selectedPlatform;
     }

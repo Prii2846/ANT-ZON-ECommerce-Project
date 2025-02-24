@@ -5,23 +5,50 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+/*
+*******************************************************************************************************
+*   @Class Name         : OrderService
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class provides functionalities for handling orders,
+*                         including placing orders, applying discounts, generating transaction IDs,
+*                         and viewing order history.
+*******************************************************************************************************
+*/
 public class OrderService {
-    // Singleton instance for OrderService
+ 
     private static OrderService instance;
-
-    // Repository dependencies for handling orders, carts, and products
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
 
-    // Private constructor to initialize repositories
+/*
+    *********************************************************
+    *  @Constructor Name : OrderService
+    *  @Author          : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company         : Antrazal
+    *  @Description     : Initializes the repositories required for order processing.
+    *  @param           : None
+    *  @throws          : ClassNotFoundException, SQLException
+    *********************************************************
+    */   
     private OrderService() throws ClassNotFoundException, SQLException {
         this.orderRepository = new OrderRepository();
         this.cartRepository = new CartRepository();
         this.productRepository = new ProductRepository();
     }
 
-    // Singleton method to ensure only one instance of OrderService is created
+    /*
+    *********************************************************
+    *  @Method Name    : getInstance
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Implements Singleton pattern to return a single instance of OrderService.
+    *  @return         : OrderService - The singleton instance
+    *  @throws         : ClassNotFoundException, SQLException
+    *********************************************************
+    */
     public static OrderService getInstance() throws ClassNotFoundException, SQLException {
         if (instance == null) {
             instance = new OrderService();
@@ -29,21 +56,40 @@ public class OrderService {
         return instance;
     }
 
-    // Generates a random transaction ID for order placement
+    /*
+    *********************************************************
+    *  @Method Name    : generateTransactionId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Generates a unique transaction ID for order processing.
+    *  @return         : String - The generated transaction ID
+    *********************************************************
+    */
     private String generateTransactionId() {
         Random random = new Random();
-        return "TXN-" + (1000000000 + random.nextInt(900000000)); // 10-digit random number prefixed with "TXN-"
+        return "TXN-" + (1000000000 + random.nextInt(900000000)); 
     }
 
-    // Finds the appropriate ProductType for a given main category, subcategory, and product type name
+     /*
+    *********************************************************
+    *  @Method Name    : findProductType
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Finds the product type based on category details.
+    *  @param          : String mainCategory - The main category of the product
+    *                  : String subCategory - The subcategory of the product
+    *                  : String productTypeName - The product type name
+    *  @return         : ProductType - The matched product type or null if not found
+    *********************************************************
+    */
     private ProductType findProductType(String mainCategory, String subCategory, String productTypeName) {
-        // List of all fixed product types
+     
         List<ProductType> allProductTypes = List.of(
             ProductType.MOBILE, ProductType.LAPTOPS, ProductType.WEARABLES, ProductType.PRINTERS,
             ProductType.ROOM, ProductType.OFFICE, ProductType.EVENT
         );
 
-        // Iterates through each product type to find a matching type
+        
         for (ProductType type : allProductTypes) {
             if (type.mainCategory().equalsIgnoreCase(mainCategory) &&
                 type.subCategory().equalsIgnoreCase(subCategory) &&
@@ -51,64 +97,75 @@ public class OrderService {
                 return type;
             }
         }
-        return null; // Returns null if no matching product type is found
+        return null; 
     }
-
-    // Places an order for the user
+ /*
+    *********************************************************
+    *  @Method Name    : placeOrder
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Places an order for the user, applying discounts and generating a transaction ID.
+    *  @param          : String username - The user placing the order
+    *                  : Platform platform - The platform ID for order processing
+    *  @return         : boolean - True if the order is placed successfully, otherwise false
+    *  @throws         : SQLException, ClassNotFoundException
+    *********************************************************
+    */
+  
     public boolean placeOrder(String username, Platform platform) throws SQLException, ClassNotFoundException {
-        // Retrieves all cart items for the user from the CartRepository
+       
         List<CartItem> cartItems = cartRepository.getCartItemsByUsername(username, platform.getPlatformId());
 
-        // If the cart is empty, display a message and return false
+       
         if (cartItems.isEmpty()) {
             System.out.println("Your cart is empty. Add items before placing an order.");
             return false;
         }
 
-        // Initialize variables for total amount and discount flags
+      
         System.out.println("\n==== YOUR CART ITEMS ====");
         double totalAmount = 0.0;
         boolean hasDiscountProduct = false;
         boolean hasEventFurniture = false;
 
-        // Iterates through each cart item to calculate the total amount and check for discounts
+      
         for (CartItem item : cartItems) {
-            // Check for specific discounted products
+           
             if (item.getProductName().equalsIgnoreCase("Dell 7640 Laptop") ||
                 item.getProductName().equalsIgnoreCase("Lenovo 5540")) {
-                hasDiscountProduct = true; // Flag for Dell/Lenovo product discount
+                hasDiscountProduct = true; 
             }
 
-            // Retrieves the product details to check its category and type
+          
             var product = productRepository.getProductById(item.getProductId(), platform.getPlatformId());
             if (product != null) {
                 ProductType productType = findProductType(product.getMainCategory(), product.getSubCategory(), product.getProductType());
 
-                // Check if the product is from the Event category of Furniture
+                
                 if (productType != null &&
                     productType.mainCategory().equalsIgnoreCase("Furniture") &&
                     productType.subCategory().equalsIgnoreCase("Event")) {
-                    hasEventFurniture = true; // Flag for additional discount
+                    hasEventFurniture = true; 
                 }
             }
 
-            // Add the product price * quantity to the total amount
+           
             totalAmount += item.getPrice() * item.getQuantity();
         }
 
-        // Apply a 2.5% discount if a discounted product is present
+      
         if (hasDiscountProduct) totalAmount *= 0.975;
 
-        // Apply an additional 2.5% discount for Event category furniture
+      
         if (hasEventFurniture) totalAmount *= 0.975;
 
-        // Generate a unique transaction ID for the order
+   
         String transactionId = generateTransactionId();
 
-        // Place the order by calling the OrderRepository's placeOrder method
+    
         boolean orderPlaced = orderRepository.placeOrder(username, cartItems, totalAmount, transactionId, platform.getPlatformId());
 
-        // Display success or failure message based on the order placement result
+        
         if (orderPlaced) {
             System.out.println("Order placed successfully! Transaction ID: " + transactionId);
             return true;
@@ -118,9 +175,20 @@ public class OrderService {
         }
     }
 
-    // Retrieves and returns the user's order history
+     /*
+    *********************************************************
+    *  @Method Name    : viewOrderHistory
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the order history for a user.
+    *  @param          : String username - The user whose order history is being retrieved
+    *                  : Platform platform - The platform ID for fetching order data
+    *  @return         : List<Order> - List of orders for the user
+    *  @throws         : SQLException
+    *********************************************************
+    */
     public List<Order> viewOrderHistory(String username, Platform platform) throws SQLException {
-        // Fetches the order history from the OrderRepository
+      
         return orderRepository.getOrderHistory(username, platform.getPlatformId());
     }
 }

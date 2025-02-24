@@ -1,59 +1,145 @@
 package models;
 
-// Represents a user in the system
+/*
+*******************************************************************************************************
+*   @Class Name         : User
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This class represents a user in the eCommerce platform with attributes 
+*                         such as ID, username, password, role, and platform.
+*******************************************************************************************************
+*/
 public class User {
-    private int id;                       // Unique identifier for the user
-    private String username;              // Username for the user
-    private String password;              // Password for the user (should be encrypted in a real system)
-    private String role;                  // Role of the user (e.g., Admin, Seller, Buyer)
-    private Platform platform;            // Platform associated with the user
+    private int id;                      
+    private String username;              
+    private String password;            
+    private String role;                
+    private Platform platform;           
 
-    // Constructor for creating a User with ID, username, and role
+   /*
+    *********************************************************
+    *  @Constructor    : User
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a User with ID, username, and role.
+    *  @param          : int id - Unique user identifier
+    *                  : String username - Username of the user
+    *                  : String role - Role of the user (Admin, Seller, Buyer)
+    *********************************************************
+    */
     public User(int id, String username, String role) {
-        this.id = id;                     // Initialize the user's ID
-        this.username = username;         // Initialize the user's username
-        this.role = role;                 // Initialize the user's role
+        this.id = id;                    
+        this.username = username;         
+        this.role = role;               
     }
 
-    // Constructor for creating a User with username, password, role, and platform
+   /*
+    *********************************************************
+    *  @Constructor    : User
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Initializes a User with username, password, role, and platform.
+    *  @param          : String username - Username of the user
+    *                  : String password - Password of the user
+    *                  : String role - Role of the user (Admin, Seller, Buyer)
+    *                  : Platform platform - Associated platform details
+    *********************************************************
+    */
     public User(String username, String password, String role, Platform platform) {
-        this.username = username;         // Initialize the user's username
-        this.password = password;         // Initialize the user's password
-        this.role = role;                 // Initialize the user's role
-        this.platform = platform;         // Initialize the user's associated platform
+        this.username = username;        
+        this.password = password;        
+        this.role = role;                
+        this.platform = platform;        
     }
 
-    // Returns the user's ID
+ /*
+    *********************************************************
+    *  @Method Name    : getId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the user ID.
+    *  @return         : int - Returns the unique user ID.
+    *********************************************************
+    */
     public int getId() {
         return id;
     }
 
-    // Sets the user's ID
+  /*
+    *********************************************************
+    *  @Method Name    : setId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Sets the user ID.
+    *  @param          : int id - The unique user ID to be set.
+    *********************************************************
+    */
     public void setId(int id) {
-        this.id = id;                     // Update the user's ID
+        this.id = id;                    
     }
 
-    // Returns the user's username
+ /*
+    *********************************************************
+    *  @Method Name    : getUsername
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the username.
+    *  @return         : String - Returns the username.
+    *********************************************************
+    */
     public String getUsername() {
         return username;
     }
 
-    // Returns the user's password
+  /*
+    *********************************************************
+    *  @Method Name    : getPassword
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the password.
+    *  @return         : String - Returns the user password.
+    *********************************************************
+    */
     public String getPassword() {
         return password;
     }
-
-    // Returns the user's role
+ /*
+    *********************************************************
+    *  @Method Name    : getRole
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the role of the user.
+    *  @return         : String - Returns the user role.
+    *********************************************************
+    */
+   
     public String getRole() {
         return role;
     }
 
-    // Returns the platform ID associated with the user
+     /*
+    *********************************************************
+    *  @Method Name    : getPlatformId
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Retrieves the platform ID associated with the user.
+    *  @return         : int - Returns the platform ID.
+    *********************************************************
+    */
     public int getPlatformId() {
-        return platform.getPlatformId();  // Retrieve the platform's ID
+        return platform.getPlatformId();  
     }
 
-    // Provides a string representation of the User object
+   /*
+    *********************************************************
+    *  @Method Name    : toString
+    *  @Author         : Priyanka Kumari (priyanka.kumari@antrazal.com)
+    *  @Company        : Antrazal
+    *  @Description    : Provides a string representation of the User object.
+    *  @return         : String - Returns the user details in string format.
+    *********************************************************
+    */
     @Override
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", role=" + role + "]";

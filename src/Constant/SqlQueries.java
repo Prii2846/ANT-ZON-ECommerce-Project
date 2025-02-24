@@ -334,4 +334,5 @@ public static final String GET_SELLERS_AND_BUYERS = """
 public static final String GET_USER = """
         SELECT * FROM users WHERE username = ? AND platform_id = ?
     """;
+
 }

@@ -2,87 +2,101 @@ package Utils;
 
 import java.util.*;
 
-/**
- * Utility class for reading input from the user. 
- * Implements the Singleton design pattern to ensure only one instance of the scanner is used.
- */
+/*
+*******************************************************************************************************
+*   @Class Name         : InputScanner
+*   @Author             : Priyanka Kumari (priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : Utility class for handling user input through a singleton Scanner instance.
+*******************************************************************************************************
+*/
 public class InputScanner {
-    private static InputScanner instance; // Singleton instance
-    private final Scanner sc; // Scanner object to read input from System.in
+    private static InputScanner instance; 
+    private final Scanner sc; 
 
-    // Private constructor to prevent instantiation
+   /*
+    *********************************************************
+    *  @Constructor    : InputScanner
+    *  @Description    : Private constructor to initialize the Scanner instance.
+    *********************************************************
+    */
     private InputScanner(){
-        this.sc = new Scanner(System.in); // Initialize the scanner
+        this.sc = new Scanner(System.in); 
     }
 
-    /**
-     * Get the singleton instance of InputScanner.
-     * 
-     * @return The instance of InputScanner
-     */
+    /*
+    *********************************************************
+    *  @Method Name    : getInstance
+    *  @Description    : Returns the singleton instance of InputScanner.
+    *  @return         : InputScanner instance
+    *********************************************************
+    */
     public static InputScanner getInstance(){
         if(instance == null){
-            instance = new InputScanner(); // Create the instance if it doesn't exist
+            instance = new InputScanner(); 
         }
-        return instance; // Return the singleton instance
+        return instance; 
     }
 
-    /**
-     * Reads a string from the user input.
-     * 
-     * @param data The prompt message to display to the user
-     * @return The string entered by the user
-     * @throws IllegalArgumentException If an invalid input is provided (empty string)
-     */
+        /*
+    *********************************************************
+    *  @Method Name    : readString
+    *  @Description    : Reads a string input from the user.
+    *  @param          : String (Prompt message)
+    *  @return         : String (User input)
+    *  @throws         : IllegalArgumentException if input is empty
+    *********************************************************
+    */
     public String readString(String data) throws IllegalArgumentException{
-        System.out.print(data); // Print prompt message
-        String input = sc.nextLine().trim(); // Read input and trim any surrounding whitespace
+        System.out.print(data); 
+        String input = sc.nextLine().trim(); 
 
-        // If input is empty, throw an exception
+        
         if (input.isEmpty()) {
             throw new IllegalArgumentException("Input cannot be empty");
         }
 
-        return input; // Return the trimmed input string
+        return input; 
     }
 
-    /**
-     * Reads an integer from the user input.
-     * Continues prompting the user until a valid integer is entered.
-     * 
-     * @param data The prompt message to display to the user
-     * @return The integer entered by the user
-     * @throws NumberFormatException If the user enters a value that is not a valid integer
-     */
+       /*
+    *********************************************************
+    *  @Method Name    : readInt
+    *  @Description    : Reads an integer input from the user.
+    *  @param          : String (Prompt message)
+    *  @return         : int (User input)
+    *  @throws         : NumberFormatException if input is not a valid integer
+    *********************************************************
+    */
     public int readInt(String data) throws NumberFormatException {
-        System.out.print(data); // Print prompt message
-        String input = sc.nextLine().trim(); // Read input and trim surrounding whitespace
-        
-        // Attempt to parse the input to an integer
-        if (!input.matches("-?\\d+")) { // Validate input before parsing
+        System.out.print(data); 
+        String input = sc.nextLine().trim(); 
+        if (!input.matches("-?\\d+")) { 
             throw new NumberFormatException("Invalid number format");
         }
 
-        return Integer.parseInt(input); // Return the parsed integer
+        return Integer.parseInt(input); 
     }
 
-    /**
-     * Reads a double from the user input.
-     * Continues prompting the user until a valid double is entered.
-     * 
-     * @param data The prompt message to display to the user
-     * @return The double entered by the user
-     * @throws NumberFormatException If the user enters a value that is not a valid double
-     */
+     /*
+    *********************************************************
+    *  @Method Name    : readDouble
+    *  @Description    : Reads a double input from the user.
+    *  @param          : String (Prompt message)
+    *  @return         : double (User input)
+    *  @throws         : NumberFormatException if input is not a valid double
+    *********************************************************
+    */
     public double readDouble(String data) throws NumberFormatException {
-        System.out.print(data); // Print prompt message
-        String input = sc.nextLine().trim(); // Read input and trim surrounding whitespace
+        System.out.print(data); 
+        String input = sc.nextLine().trim(); 
 
-        // Attempt to parse the input to a double
-        if (!input.matches("-?\\d+(\\.\\d+)?")) { // Validate input before parsing
+       
+        if (!input.matches("-?\\d+(\\.\\d+)?")) { 
             throw new NumberFormatException("Invalid number format");
         }
 
-        return Double.parseDouble(input); // Return the parsed double
+        return Double.parseDouble(input); 
     }
 }

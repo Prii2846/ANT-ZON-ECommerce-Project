@@ -5,37 +5,70 @@ import java.util.List;
 import dbRepository.AdminRepository;
 import models.Platform;
 
+/*
+*******************************************************************************************************
+*   @Parent Class Name  : Services
+*   @Class Name         : BuyerService
+*   @Author             : <Priyanka Kumari>(priyanka.kumari@antrazal.com)
+*   @Company            : Antrazal
+*   @Date               : 22-02-2025
+*   @Description        : This service class handles buyer-related statistics such as best-selling 
+*                         and most-liked products. It communicates with AdminRepository to fetch data.
+*******************************************************************************************************
+*/
 public class BuyerService {
     
-    // Instance of AdminRepository for accessing admin-level data
+      /*
+    *********************************************************
+     *  @Variable Name   : adminRepository
+     *  @author         : <Priyanka Kumari>(priyanka.kumari@antrazal.com)
+     *  @Company        : Antrazal
+     *  @description    : Repository instance for database operations
+    ********************************************************
+    */
     private final AdminRepository adminRepository;
 
-    // Constructor to initialize AdminRepository
+     /*
+    *********************************************************
+     *  @Method Name    : BuyerService Constructor
+     *  @author         : <Priyanka Kumari>(priyanka.kumari@antrazal.com)
+     *  @Company        : Antrazal
+     *  @description    : Initializes the AdminRepository instance for data retrieval
+     *  @throws         : ClassNotFoundException, SQLException
+    ********************************************************
+    */
     public BuyerService() throws ClassNotFoundException, SQLException {
         this.adminRepository = new AdminRepository();
     }
-
-    /**
-     * Retrieves the list of best-selling products for the specified platform.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of best-selling product names.
-     * @throws SQLException 
-     */
+  /*
+    *********************************************************
+     *  @Method Name    : getBestSellingProducts
+     *  @author         : <Priyanka Kumari>(priyanka.kumari@antrazal.com)
+     *  @Company        : Antrazal
+     *  @description    : Fetches a list of best-selling products for the given platform
+     *  @param          : platform - The eCommerce platform (Amazon, Flipkart, ANT-ZON)
+     *  @return         : List<String> - List of best-selling product names
+     *  @throws         : SQLException
+    ********************************************************
+    */
     public List<String> getBestSellingProducts(Platform platform) throws SQLException {
-        // Call the repository to get the best-selling products based on the platform
+       
         return adminRepository.getBestSellingProducts(platform);
     }
 
-    /**
-     * Retrieves the list of most liked products for the specified platform.
-     * Throws SQLException if database access fails.
-     * @param platform The platform instance for accessing platform-specific data.
-     * @return A list of most liked product names.
-     * @throws SQLException 
-     */
+   /*
+    *********************************************************
+     *  @Method Name    : getMostLikedProducts
+     *  @author         : <Priyanka Kumari>(priyanka.kumari@antrazal.com)
+     *  @Company        : Antrazal
+     *  @description    : Fetches a list of most liked products for the given platform
+     *  @param          : platform - The eCommerce platform (Amazon, Flipkart, ANT-ZON)
+     *  @return         : List<String> - List of most liked product names
+     *  @throws         : SQLException
+    ********************************************************
+    */
     public List<String> getMostLikedProducts(Platform platform) throws SQLException {
-        // Call the repository to get the most liked products based on the platform
+       
         return adminRepository.getMostLikedProducts(platform);
     }
 }
